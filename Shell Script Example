@@ -1,0 +1,58 @@
+#!/bin/bash
+#Author : Durgesh Mishra
+#Date Created : 11-06-2021
+#Description :This script will output Control file data into .csv format
+
+SOURCE="D:/Shell_scri[t"
+#echo "My source file is $SOURCE"
+
+
+#This Function will UNZIP the folder
+function unzipp() {
+        #echo "Calling Function - " $1
+        #locate $1
+        echo " "
+        echo "UNZIPPING........................................................../"
+        unzip "$1"
+
+
+}
+
+#This Function will identify Control file
+function identify_control_file(){
+        TARGET_DIR="$PWD"
+        echo "Our target directory is $TARGET_DIR"
+        locate $TARGET_DIR
+        if [ -d "$TARGET_DIR" ]; then
+                echo "$TARGET_DIR directory is VALID."
+                #This Loop will search CONTROL file in the SOURCE directory
+                for file in "$TARGET_DIR"/*
+                do
+                        for sub_files in "$file"/*
+                        do
+                                #echo "SubFoler -----> $sub_files"
+                                for control_file in "$sub_files"/*
+                                do
+                                        echo "$control_file"
+                                        if [[ "$control_file" == *"Control_file.txt"* ]]; then
+                                                echo "$control_file file is a Control file"
+
+                                                #EXPORT DATA INTO ,CSV/.JSON
+
+                                                value=`$control_file`
+                                                echo $value
+                                                #value = $control_file
+                                                #echo value
+                                                #grep value | tr "\\t" "," > output_file.csv
+                                        else
+                                                echo " "
+                                                echo "$control_file file is not a CONTROL file"
+                                        fi
+                                done
+                        done
+                done
+
+
+        else
+myscript [unix] (04:55 11/06/2021)                                                                                                                                                                      45,1-8 Top
+"myscript" [unix] 91L, 2111B
