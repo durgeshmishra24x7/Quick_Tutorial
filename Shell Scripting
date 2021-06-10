@@ -1,0 +1,152 @@
+#! /bin/bash
+
+#Echo command
+echo Hello World
+
+#Variables
+#Uppercase by convention
+#Letters,numbers,underscores
+NAME = "Durgesh"
+#echo "My name is $NAME
+echo "My name is ${NAME}"
+
+#USER_INPUT
+read -p "Enter your name: " NAME
+echo "Hello $NAME, nice to meet you!"
+
+#SIMPLE IF STATEMENT
+if [ "$NAME" == "Durgesh"  ]
+then
+	echo "Your name is Durgesh"
+fi 
+
+#IF-ELSE
+if [ "$NAME" == "Durgesh"  ]
+then
+	echo "Your name is Durgesh"
+else
+	echo "Your name is NOT Durgesh"
+fi 
+
+#ELIF
+if [ "$NAME" == "Durgesh"  ]
+then
+	echo "Your name is Durgesh"
+elif ["$NAME" == "XYZ"]
+then
+	echo "Your name is XYZ"
+else
+	echo "Your name is NOT Durgesh"
+fi
+
+# COMPARISON
+NUM1=2
+NUM2=4
+
+# -gt ---> Greater than
+# -ne ---> Not Equal
+# -ge --> Greater than or equal to
+# -lt ---> less than
+# -le ---> less than or equal to
+
+if [ "$NUM1" -gt "$NUM2" ]
+then
+	echo "$NUM1 is greater than $NUM2"
+else
+	echo "$NUM1 is less than $NUM2"
+fi
+
+# FILE CONDITIONS
+# To create a file
+in Terminal, write ---> touch test.txt
+and run ---> ./name_of_the_script (eg:- ./myscript.sh)
+
+#To remove file
+rm test.txt
+
+# To make directory/Folder
+mkdir test_folder
+
+1. -d file ---> True if the file is in a directory
+2. -e file ---> True if the file exists (note that this is not particularly portable, thus -f is generally used)
+3. -f file ---> True if the provided string is a file
+4. -g file ---> True if the group is set on  a file
+5. -r file ---> True if the file is readable
+6. -s file ---> True if the file has a non - zero size
+7. -u file ---> True if the user id is set on a file
+8. -w file ---> True if the file is writable
+9. -x file ---> True if the file is an executable
+
+FILE = "test.txt"
+if [ "-f "$FILE" ]
+then
+	echo "$FILE is a file"
+else
+	echo "$FILE is NOT a file"
+fi
+
+# CASE STATEMENT
+read -p "Are you 21 or over? Y/N " ANSWER
+case "$ANSWER" in
+	[yY] | [yY][eE][sS]) ---> break string (YES), | --> means OR
+	echo "You can have a beer :)"
+
+	;; ---> This is to close the statement
+	[nN] | [nN][oO]) ---> break string (NO)
+
+	echo "Sorry, No Drinking"
+	;; ---> This is to close the statement
+
+	*) ---> This is, ELSE
+	echo "Please enter y/yes or n/no"
+	;;
+esac
+
+
+#LOOPS
+# For loop
+NAMES="Durgesh Percy Legion Smokey"
+for NAME in $NAMES
+	do
+		echo "Hello $NAME"
+done
+
+#To create multiple text files
+touch 1.txt 2.txt 3.txt
+
+# FOR LOOP TO RENAME FILES
+FILES = $(ls *.txt) ---> ls is LIST
+NEW = "new"
+for FILE in $FILES
+	do
+		echo "Renaming $FILE to new-$FILE"
+		mv $FILE $NEW-$FILE
+done
+
+# WHILE LOOP - READ THROUGH A FILE LINE BY LINE
+LINE =1
+while read -r CURRENT_LINE
+	do
+		echo "$LINE: $CURRENT_LINE"
+		((LINE++)) ---> Here, we are incrementing LINE+=1
+done < "./new-1.txt"
+
+#FUNCTION
+function sayHello() {
+	echo "Hello World"
+}
+
+sayHello
+
+# FUNCTION WITH PARAMS
+function greet(){
+	echo "Hello I am $1 and I am $2"
+}
+
+greet("XYZ" "26")
+
+# CREATE FOLDER AND WRITE TO A FILE
+mkdir hello
+touch "hello/world.txt" 
+echo "Hello World">> "hello/world.txt"  ---> Hello World inside the world.txt
+echo "Created hello/world.txt
